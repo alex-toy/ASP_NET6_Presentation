@@ -1,18 +1,18 @@
-﻿using ClassesApp.Extensions;
+﻿using ClassesApp;
 
-//Demo.DemoEleve();
+Demo.DemoEleve();
 
-DateTime today = DateTime.Today;
+//DateTime today = DateTime.Today;
 
-DateTime lastDayOfWeek = today.LastDayOfWeek(DayOfWeek.Tuesday);
-DateTime nextDayOfWeek = today.NextDayOfWeek(DayOfWeek.Monday);
+//DateTime lastDayOfWeek = today.LastDayOfWeek(DayOfWeek.Tuesday);
+//DateTime nextDayOfWeek = today.NextDayOfWeek(DayOfWeek.Monday);
 
-int daysCount = today.GetWorkingDaysCount(today.AddDays(10));
+//int daysCount = today.GetWorkingDaysCount(today.AddDays(10));
 
 
-Console.WriteLine(lastDayOfWeek);
-Console.WriteLine(nextDayOfWeek);
-Console.WriteLine(daysCount);
+//Console.WriteLine(lastDayOfWeek);
+//Console.WriteLine(nextDayOfWeek);
+//Console.WriteLine(daysCount);
 
 
 
