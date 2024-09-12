@@ -1,7 +1,10 @@
-﻿namespace GestionCoursWeb.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GestionCoursWeb.Models;
 
 public class Diplome
 {
+    [Key]
     public int Id { get; set; }
     public string Code { get; set; }
     public string Nom { get; set; }

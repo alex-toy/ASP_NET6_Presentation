@@ -11,12 +11,12 @@ internal class AnnuaireContext
 
     public AnnuaireContext()
     {
-        Diplome TSSR = new Diplome { Id = 1, Code = "TSSR", Nom = "Technicien Supérieur Systèmes et Réseaux", Niveau = 5 };
-        Diplome D2WM = new Diplome { Id = 2, Code = "D2WM", Nom = "Développeur Web et Web Mobile", Niveau = 5 };
-        Diplome ASR = new Diplome  { Id = 3, Code = "ASR", Nom = "Administrateur Système et Réseau", Niveau = 6 };
-        Diplome CDA = new Diplome  { Id = 4, Code = "CDA", Nom = "Concepteur Développeur d'Applications", Niveau = 6 };
-        Diplome ESD = new Diplome  { Id = 5, Code = "ESD", Nom = "Expert en Sécurité Digitale", Niveau = 7 };
-        Diplome MS2D = new Diplome { Id = 6, Code = "MS2D", Nom = "Manager de Solutions Digitales et Data", Niveau = 7 };
+        Diplome TSSR = new Diplome { /*Id = 1,*/ Code = "TSSR", Nom = "Technicien Supérieur Systèmes et Réseaux", Niveau = 5 };
+        Diplome D2WM = new Diplome { /*Id = 2,*/ Code = "D2WM", Nom = "Développeur Web et Web Mobile", Niveau = 5 };
+        Diplome ASR = new Diplome  { /*Id = 3,*/ Code = "ASR", Nom = "Administrateur Système et Réseau", Niveau = 6 };
+        Diplome CDA = new Diplome  { /*Id = 4,*/ Code = "CDA", Nom = "Concepteur Développeur d'Applications", Niveau = 6 };
+        Diplome ESD = new Diplome  { /*Id = 5,*/ Code = "ESD", Nom = "Expert en Sécurité Digitale", Niveau = 7 };
+        Diplome MS2D = new Diplome { /*Id = 6,*/ Code = "MS2D", Nom = "Manager de Solutions Digitales et Data", Niveau = 7 };
         Diplomes.Add(TSSR);
         Diplomes.Add(D2WM);
         Diplomes.Add(ASR);

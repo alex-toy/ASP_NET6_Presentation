@@ -6,14 +6,23 @@ namespace GestionCoursWeb.Controllers;
 
 public class AnnuaireController : Controller
 {
-    private readonly AnnuaireContext _context = new AnnuaireContext();
+    private readonly DatabaseContext _context;
 
-    public IActionResult Index()
+    public AnnuaireController(DatabaseContext context)
     {
-        List<Diplome> diplomes = _context.Diplomes
-            .OrderBy(d => d.Niveau)
-            .ThenBy(d => d.Nom)
-            .ToList();
+        _context = context;
+    }
+
+    private readonly AnnuaireContext _annuaireContext = new AnnuaireContext();
+
+    public async Task<IActionResult> Index()
+    {
+
+        //List<Diplome> diplomes = _annuaireContext.Diplomes.ToList();
+        //diplomes.ForEach(n => _context.Add(n));
+        //await _context.SaveChangesAsync();
+
+        List<Diplome> diplomes = _context.Diplomes.ToList();
 
         return View(diplomes);
     }
@@ -28,7 +37,7 @@ public class AnnuaireController : Controller
     }
 
     [HttpPost]
-    public IActionResult Edit(Diplome diplome)
+    public async Task<IActionResult> Edit(Diplome diplome)
     {
         Diplome? diplomeDb = _context.Diplomes.FirstOrDefault(d => d.Id == diplome.Id);
 
@@ -37,6 +46,22 @@ public class AnnuaireController : Controller
         diplomeDb.Code = diplome.Code;
         diplomeDb.Niveau = diplome.Niveau;
         diplomeDb.Nom = diplome.Nom;
+        //_context.Add(diplome);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(Diplome diplome)
+    {
+        _context.Add(diplome);
+        await _context.SaveChangesAsync();
 
         return RedirectToAction("Index");
     }
