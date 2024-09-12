@@ -4,7 +4,7 @@
 
 namespace GestionCoursWeb.Migrations
 {
-    public partial class key : Migration
+    public partial class keys : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

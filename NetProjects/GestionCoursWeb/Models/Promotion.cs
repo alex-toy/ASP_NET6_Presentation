@@ -1,7 +1,12 @@
-﻿namespace GestionCoursWeb.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GestionCoursWeb.Models;
 
 public class Promotion
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key]
     public int Id { get; set; }
     public string Nom { get; set; }
     public DateTime Debut { get; set; }

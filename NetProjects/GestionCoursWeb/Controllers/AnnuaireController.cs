@@ -13,18 +13,31 @@ public class AnnuaireController : Controller
         _context = context;
     }
 
-    private readonly AnnuaireContext _annuaireContext = new AnnuaireContext();
-
     public async Task<IActionResult> Index()
     {
-
-        //List<Diplome> diplomes = _annuaireContext.Diplomes.ToList();
-        //diplomes.ForEach(n => _context.Add(n));
-        //await _context.SaveChangesAsync();
-
         List<Diplome> diplomes = _context.Diplomes.ToList();
 
         return View(diplomes);
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(Diplome diplome)
+    {
+        if (_context.Diplomes.Any(d => d.Code == diplome.Code))
+        {
+            ViewBag.Error = "Ce diplome existe déjà";
+            return View(diplome);
+        }
+
+        _context.Add(diplome);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Index");
     }
 
     public IActionResult Edit(int id)
@@ -41,26 +54,23 @@ public class AnnuaireController : Controller
     {
         Diplome? diplomeDb = _context.Diplomes.FirstOrDefault(d => d.Id == diplome.Id);
 
-        if (diplomeDb is null) return NotFound();
+        if (diplomeDb is null)
+        {
+            ViewBag.Error = "Ce diplome n'existe pas";
+            return View(diplome);
+        }
+
+        if (_context.Diplomes.Any(d => d.Code == diplome.Code) && diplome.Code != diplomeDb.Code)
+        {
+            ViewBag.Error = "Ce diplome existe déjà";
+            return View(diplome);
+        }
 
         diplomeDb.Code = diplome.Code;
         diplomeDb.Niveau = diplome.Niveau;
         diplomeDb.Nom = diplome.Nom;
-        //_context.Add(diplome);
-        await _context.SaveChangesAsync();
 
-        return RedirectToAction("Index");
-    }
-
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create(Diplome diplome)
-    {
-        _context.Add(diplome);
+        _context.Update(diplomeDb);
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Index");

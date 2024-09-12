@@ -1,28 +1,30 @@
 {
   "profiles": {
-    "GestionCoursWeb": {
+    "CoursAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7027;http://localhost:5205"
+      "applicationUrl": "https://localhost:7226;http://localhost:5156"
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:3088",
-      "sslPort": 44349
+      "applicationUrl": "http://localhost:55507",
+      "sslPort": 44346
     }
   }
 }

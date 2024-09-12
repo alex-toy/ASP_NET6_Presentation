@@ -22,6 +22,21 @@ namespace GestionCoursWeb.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ElevePromotion", b =>
+                {
+                    b.Property<int>("ElevesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PromotionsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ElevesId", "PromotionsId");
+
+                    b.HasIndex("PromotionsId");
+
+                    b.ToTable("ElevePromotion");
+                });
+
             modelBuilder.Entity("GestionCoursWeb.Models.Diplome", b =>
                 {
                     b.Property<int>("Id")
@@ -32,16 +47,21 @@ namespace GestionCoursWeb.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Niveau")
                         .HasColumnType("int");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
 
                     b.ToTable("Diplomes");
                 });
@@ -68,22 +88,18 @@ namespace GestionCoursWeb.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PromotionId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Ville")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PromotionId");
 
                     b.ToTable("Eleves");
                 });
@@ -107,7 +123,8 @@ namespace GestionCoursWeb.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -116,15 +133,19 @@ namespace GestionCoursWeb.Migrations
                     b.ToTable("Promotions");
                 });
 
-            modelBuilder.Entity("GestionCoursWeb.Models.Eleve", b =>
+            modelBuilder.Entity("ElevePromotion", b =>
                 {
-                    b.HasOne("GestionCoursWeb.Models.Promotion", "Promotion")
-                        .WithMany("Eleves")
-                        .HasForeignKey("PromotionId")
+                    b.HasOne("GestionCoursWeb.Models.Eleve", null)
+                        .WithMany()
+                        .HasForeignKey("ElevesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Promotion");
+                    b.HasOne("GestionCoursWeb.Models.Promotion", null)
+                        .WithMany()
+                        .HasForeignKey("PromotionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GestionCoursWeb.Models.Promotion", b =>
@@ -141,11 +162,6 @@ namespace GestionCoursWeb.Migrations
             modelBuilder.Entity("GestionCoursWeb.Models.Diplome", b =>
                 {
                     b.Navigation("Promotions");
-                });
-
-            modelBuilder.Entity("GestionCoursWeb.Models.Promotion", b =>
-                {
-                    b.Navigation("Eleves");
                 });
 #pragma warning restore 612, 618
         }
